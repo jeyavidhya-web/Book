@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Book</title>
+  <style>
+    form {
+      max-width: 500px;
+      margin: 2em auto;
+      padding: 1.5em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    label {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1em;
+      gap: 1em;
+    }
+    label input, label select {
+      flex: 1;
+      padding: 0.3em;
+    }
+    .form-actions {
+      text-align: right;
+    }
+    .msg-error { color: red; }
+    .msg-info { color: green; }
+  </style>
+</head>
+<body>
+  <h1 style="text-align:center;">Edit Book</h1>
+  <% if (errors && errors.length) { %>
+    <ul>
+      <% errors.forEach(e => { %><li class="msg-error"><%= e %></li><% }) %>
+    </ul>
+  <% } %>
+  <form action="/books/edit/<%= book._id %>" method="POST">
+    <label>
+      Title:
+      <input type="text" name="title" value="<%= book.title %>" required />
+    </label>
+    <label>
+      Author:
+      <input type="text" name="author" value="<%= book.author %>" required />
+    </label>
+    <label>
+      Genre:
+      <select name="genre">
+        <option value="Fiction" <%= book.genre === 'Fiction' ? 'selected' : '' %>>Fiction</option>
+        <option value="Nonfiction" <%= book.genre === 'Nonfiction' ? 'selected' : '' %>>Nonfiction</option>
+        <option value="Fantasy" <%= book.genre === 'Fantasy' ? 'selected' : '' %>>Fantasy</option>
+        <option value="Sci-Fi" <%= book.genre === 'Sci-Fi' ? 'selected' : '' %>>Sci-Fi</option>
+        <option value="Biography" <%= book.genre === 'Biography' ? 'selected' : '' %>>Biography</option>
+        <option value="Other" <%= book.genre === 'Other' ? 'selected' : '' %>>Other</option>
+      </select>
+    </label>
+    <label>
+      Published Date:
+      <input type="date" name="publishedDate" value="<%= book.publishedDate ? book.publishedDate.toISOString().substring(0,10) : '' %>" />
+    </label>
+    <label>
+      Rating:
+      <input type="number" name="rating" min="1" max="5" value="<%= book.rating || 3 %>" />
+    </label>
+    <label>
+      <input type="checkbox" name="isPublic" value="true" <%= book.isPublic ? 'checked' : '' %> />
+      Public
+    </label>
+    <label>
+      Tags:
+      <input type="text" name="tags" value="<%= book.tags && book.tags.length ? book.tags.join(', ') : '' %>" placeholder="Tags (comma separated)" />
+    </label>
+    <div class="form-actions">
+      <button type="submit">Save</button>
+      <a href="/books" style="margin-left:1em;">Cancel</a>
+    </div>
+  </form>
+</body>
+</html>

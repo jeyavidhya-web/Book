@@ -1,0 +1,14 @@
+<form method="POST" action="/sessions/register">
+  
+
+  <input name="name" placeholder="Name" required />
+
+  <input name="email" type="email" placeholder="Email" required />
+  <input name="password" type="password" placeholder="Password" required />
+  <input name="confirmPassword" type="password" placeholder="Confirm Password" required />
+  
+  <button>Register</button>
+</form>
+<ul>
+  <% errors.forEach(e => { %><li style="color:red"><%= e %></li><% }) %>
+</ul>
