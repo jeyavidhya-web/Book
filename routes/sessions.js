@@ -17,7 +17,7 @@ router.get('/register', (req, res) => {
 // 🔹 Handle registration
 router.post('/register', async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
-  console.log('Form submitted:', { email, password, confirmPassword });
+  //console.log('Form submitted:', { email, password, confirmPassword });
   const errors = [];
 
   if (!email || !password || !confirmPassword) {

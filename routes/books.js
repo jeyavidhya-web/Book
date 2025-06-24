@@ -129,9 +129,6 @@ router.post('/delete/:id',  async (req, res) => {
   }
 });
 
-
-// ...existing code...
-
 // Search books by title
 router.get('/search', async (req, res) => {
   const search = req.query.title || '';
@@ -151,6 +148,5 @@ router.get('/search', async (req, res) => {
   }
 });
 
-// ...existing code...
 
 module.exports = router;

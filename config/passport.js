@@ -5,21 +5,21 @@ const bcrypt = require('bcryptjs');
 module.exports = function (passport) {
 
   passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-  console.log('Login attempt:', email);
+  //console.log('Login attempt:', email);
   try {
     const user = await User.findOne({ email: email});
     if (!user) {
-      console.log('No user found with email:', email);
+      //console.log('No user found with email:', email);
       return done(null, false, { message: 'Incorrect email.' });
     }
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log('Password match:', isMatch);
+    //console.log('Password match:', isMatch);
     if (!isMatch) {
-      console.log('Password match:', isMatch);
+     // console.log('Password match:', isMatch);
       return done(null, false, { message: 'Incorrect password.' });
     }
 
-    console.log("done called")
+    //console.log("done called")
     return done(null, user);
 
   } catch (err) {
