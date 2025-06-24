@@ -1,6 +1,8 @@
-
-
 const express = require("express");
+const helmet = require('helmet');
+const xss = require('xss-clean');
+
+
 require("express-async-errors");
 require("dotenv").config();
 const app = express();
@@ -41,6 +43,11 @@ if (app.get("env") === "production") {
   app.set("trust proxy", 1); // trust first proxy
   sessionParms.cookie.secure = true; // serve secure cookies
 }
+
+
+app.use(helmet());      // Secure HTTP headers
+app.use(xss());         // Prevent XSS attacks
+
 
 app.use(session(sessionParms));
 app.use(passport.initialize());

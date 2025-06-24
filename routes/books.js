@@ -140,7 +140,6 @@ router.get('/search', async (req, res) => {
   const search = req.query.title || '';
   try {
     const books = await Book.find({
-      owner: req.user._id,
       title: { $regex: search, $options: 'i' }
     }).sort({ createdAt: -1 });
     res.render('books', {
