@@ -2,6 +2,7 @@ const express = require("express");
 const helmet = require('helmet');
 const xss = require('xss-clean');
 
+const Book = require('./models/Book'); // Adjust the path if needed
 
 require("express-async-errors");
 require("dotenv").config();
@@ -60,8 +61,13 @@ app.use(require("connect-flash")());
 const sessionRoutes = require('./routes/sessions');
 app.use('/sessions', sessionRoutes);
 
+
+
+
 const bookRoutes = require('./routes/books');
 const auth = require("./middleware/auth");
+
+
 app.use('/books', auth, bookRoutes);
 
 

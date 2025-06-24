@@ -5,6 +5,11 @@ const Book = require('../models/Book');
 //const  auth  = require('../middleware/auth');
 const router = express.Router();
 
+const {
+  getAllBooks
+  
+} = require('../controllers/booksController')
+
 // Validation rules for creating/updating book
 const bookValidationRules = [
   body('title').notEmpty().withMessage('Title is required').trim().escape(),
@@ -13,16 +18,8 @@ const bookValidationRules = [
   body('publishedDate').optional().isISO8601().toDate().withMessage('Published date must be a valid date'),
 ];
 
-// List books, sorted by generation ascending
-router.get('/', async (req, res) => {
-  try {
-  const books = await Book.find({owner: req.user.id }).sort({ createdAt: -1});
-  res.render('books', { books, errors: req.flash('error'), info: req.flash('info') });
-  } catch (err) {
-    req.flash('error', 'Failed to load books');
-    res.redirect('/');
-  }
-});
+
+router.get('/', getAllBooks);
 
 // Add a new book and link to user
 

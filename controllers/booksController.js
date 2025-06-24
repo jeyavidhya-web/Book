@@ -4,9 +4,14 @@ const { StatusCodes } = require('http-status-codes');
 const { BadRequestError, NotFoundError } = require('../errors');
 
 const getAllBooks = async (req, res) => {
-  const books = await Book.find({ createdBy: req.user.userId }).sort('createdAt');
-  res.status(StatusCodes.OK).json({ books, count: books.length });
-};
+  try {
+    const books = await Book.find().sort({ createdAt: -1});
+    res.render('books', { books, errors: req.flash('error'), info: req.flash('info') });
+    } catch (err) {
+      req.flash('error', 'Failed to load books');
+      res.redirect('/');
+    }
+  };
 
 const getBook = async (req, res) => {
   const {
