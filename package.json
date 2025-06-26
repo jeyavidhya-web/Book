@@ -38,5 +38,15 @@
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.8.0",
+    "chai": "^5.2.0",
+    "chai-http": "^5.1.2",
+    "factory-bot": "^6.3.1",
+    "install": "^0.13.0",
+    "mocha": "^11.7.1",
+    "npm": "^11.4.2",
+    "puppeteer": "^24.10.2"
   }
 }
